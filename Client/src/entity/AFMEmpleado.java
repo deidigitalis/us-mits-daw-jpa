@@ -164,22 +164,30 @@ public class AFMEmpleado implements Serializable {
         this.departamento = departamento;
     }
 
+    @Override
     public String toString() {
         StringBuffer buffer = new StringBuffer();
         buffer.append("Id: ");
         buffer.append(getId());
+        buffer.append(" ");
         buffer.append("Salario: ");
         buffer.append(getSalario());
+        buffer.append(" ");
         buffer.append("Nombre: ");
         buffer.append(getNombre());
+        buffer.append(" ");
         buffer.append("Apellidos: ");
         buffer.append(getApellido());
+        buffer.append(" ");
         buffer.append("Fecha de alta: ");
         buffer.append(getFechaalta());
+        buffer.append(" ");
         buffer.append("Nombre Completo: ");
         buffer.append(getNombreCompleto());
+        buffer.append(" ");
         buffer.append("Teléfonos: ");
         buffer.append(getTelefonos());
+        buffer.append(" ");
         buffer.append("Departamento: ");
         buffer.append(getDepartamento());
 

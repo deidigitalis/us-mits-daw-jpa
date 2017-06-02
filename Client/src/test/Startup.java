@@ -1,5 +1,6 @@
 package test;
 
+import entity.AFMDepartamento;
 import entity.AFMEmpleado;
 import entity.AFMNumeroTelefono;
 import entity.AFMProyecto;
@@ -43,11 +44,17 @@ public class Startup {
     private List<AFMEmpleado> findAll() {
         Query q = em.createNamedQuery("AFMEmpleado.findAll");
         return q.getResultList();
-
     }
 
     private void createData() {
         em.getTransaction().begin();
+
+        Set<AFMDepartamento> departamentos = crearDepartamentos();
+        AFMDepartamento lsi = departamentos.stream()
+                                           .filter(x -> x.getAbreviatura() == "LSI")
+                                           .findFirst()
+                                           .get();
+
         AFMEmpleado e = new AFMEmpleado();
         //e.setId(1);
         e.setApellido("Fernandez-Montes");
@@ -56,6 +63,7 @@ public class Startup {
         e.setFechaalta(new Date());
         e.setTelefonos(crearTelefonos(e));
         e.setSeguroSanitario(crearSeguroSanitario("Sanitas"));
+        e.setDepartamento(lsi);
 
         em.persist(e);
 
@@ -67,6 +75,7 @@ public class Startup {
         e2.setFechaalta(new Date());
         e2.setTelefonos(crearTelefonos(e2));
         e2.setSeguroSanitario(crearSeguroSanitario("Asisa"));
+        e2.setDepartamento(lsi);
 
         Set<AFMEmpleado> empleados = new HashSet<AFMEmpleado>();
         empleados.add(e);
@@ -82,7 +91,6 @@ public class Startup {
         em.close();
         emf.close();
     }
-
 
     private List<AFMNumeroTelefono> crearTelefonos(AFMEmpleado dueño) {
         AFMNumeroTelefono tef1 = new AFMNumeroTelefono();
@@ -129,5 +137,38 @@ public class Startup {
 
         em.persist(proy1);
         em.persist(proy2);
+    }
+
+    /**
+     * Crea la colección de departamentos, los hace persistentes
+     * @return Los departamentos creados
+     */
+    private Set<AFMDepartamento> crearDepartamentos() {
+        Set<AFMDepartamento> departamentos = new HashSet<AFMDepartamento>();
+
+        AFMDepartamento lsi = new AFMDepartamento();
+        lsi.setNombre("Lenguajes y Sistemas Informáticos");
+        lsi.setDescripcion("");
+        lsi.setAbreviatura("LSI");
+        lsi.setUrl("www.lsi.us.es");
+        departamentos.add(lsi);
+
+        AFMDepartamento ma1 = new AFMDepartamento();
+        ma1.setNombre("Matemática Aplicada I");
+        ma1.setDescripcion("");
+        ma1.setAbreviatura("MA1");
+        ma1.setUrl("ma1.eii.us.es");
+        departamentos.add(ma1);
+
+        AFMDepartamento ccia = new AFMDepartamento();
+        ccia.setNombre("Ciencias de la Computación e Inteligencia Artificial");
+        ccia.setDescripcion("");
+        ccia.setAbreviatura("CCIA");
+        ccia.setUrl("www.cs.us.es");
+        departamentos.add(ccia);
+
+        departamentos.forEach((departamento) -> em.persist(departamento));
+
+        return departamentos;
     }
 }

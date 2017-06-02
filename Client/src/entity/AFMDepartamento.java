@@ -55,6 +55,13 @@ public class AFMDepartamento implements Serializable {
      * Descripción
      */
     private String descripcion;
+    
+    /**
+     * Abreviatura del departamento
+     */
+    private String abreviatura;
+    
+    private String url;
 
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "departamento")
     private List<AFMEmpleado> empleados;
@@ -141,16 +148,49 @@ public class AFMDepartamento implements Serializable {
     public void setVersion(Integer version) {
         this.version = version;
     }
+    
+    /**
+     *Obtiene la abreviatura del departamento
+     */
+    public String getAbreviatura() {
+        return this.abreviatura;
+    }
+    
+    /**
+     * Fija la abreviatura del departamento
+     * @param abreviatura Nueva abreviatura
+     */
+    public void setAbreviatura(String abreviatura) {
+        this.abreviatura = abreviatura;
+    }
+    
+    /**
+     * Obtiene la URL
+     */
+    public String getUrl() {
+        return this.url;
+    }
+    
+    /**
+     * Fija la URL
+     * @param url Nueva URL
+     */
+    public void setUrl(String url) {
+        this.url = url;
+    }
 
     @Override
     public String toString() {
         StringBuffer buffer = new StringBuffer();
         buffer.append("Id: ");
         buffer.append(getId());
+        buffer.append(" ");
         buffer.append("Nombre: ");
         buffer.append(getNombre());
+        buffer.append(" ");
         buffer.append("Descripción: ");
         buffer.append(getDescripcion());
+        buffer.append(" ");
         return buffer.toString();
     }
 }
