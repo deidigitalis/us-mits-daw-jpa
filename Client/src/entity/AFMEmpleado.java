@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -51,10 +52,18 @@ public class AFMEmpleado implements Serializable {
     @ManyToMany
     private List<AFMProyecto> proyectos = new ArrayList<AFMProyecto>();
 
-    @Temporal(javax.persistence.TemporalType.DATE)
+    @Temporal(javax.persistence
+                   .TemporalType
+                   .DATE)
     private Date fechaalta;
 
     private Long salario;
+
+    /**
+     * AFMDepartamento del empleado
+     */
+    @ManyToOne
+    private AFMDepartamento departamento;
 
     public AFMEmpleado() {
     }
@@ -139,9 +148,41 @@ public class AFMEmpleado implements Serializable {
         this.salario = salario;
     }
 
+    /**
+     * Obtiene el departamento del empleado
+     * @return El departamento
+     */
+    public AFMDepartamento getDepartamento() {
+        return this.departamento;
+    }
+
+    /**
+     * Fija el departamento del empleado
+     * @param departamento El nuevo departamento
+     */
+    public void setDepartamento(AFMDepartamento departamento) {
+        this.departamento = departamento;
+    }
+
     public String toString() {
-        return "Id: " + id + " Salario: " + salario + " Nombre: " + nombre + " Apellidos: " + apellido +
-               " Fecha de alta: " + fechaalta + " Nombre Completo: " + nombreCompleto /*+"\nTelefonos: "+telefonos +
-            " SeguroSanitario:" + seguroSanitario*/;
+        StringBuffer buffer = new StringBuffer();
+        buffer.append("Id: ");
+        buffer.append(getId());
+        buffer.append("Salario: ");
+        buffer.append(getSalario());
+        buffer.append("Nombre: ");
+        buffer.append(getNombre());
+        buffer.append("Apellidos: ");
+        buffer.append(getApellido());
+        buffer.append("Fecha de alta: ");
+        buffer.append(getFechaalta());
+        buffer.append("Nombre Completo: ");
+        buffer.append(getNombreCompleto());
+        buffer.append("Teléfonos: ");
+        buffer.append(getTelefonos());
+        buffer.append("Departamento: ");
+        buffer.append(getDepartamento());
+
+        return buffer.toString();
     }
 }

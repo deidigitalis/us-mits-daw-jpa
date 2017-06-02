@@ -133,6 +133,10 @@
             <url n="id" protocol="file" path="/C:/Users/deidigitalis/AppData/Roaming/JDeveloper/system12.2.1.2.42.170105.1224/o.jdeveloper/Hibernate Validator.library"/>
             <value n="isJDK" v="false"/>
          </hash>
+         <hash>
+            <value n="id" v="EJB"/>
+            <value n="isJDK" v="false"/>
+         </hash>
       </list>
       <hash n="internalDefinitions">
          <list n="libraryDefinitions"/>
@@ -160,6 +164,10 @@
          </hash>
          <hash>
             <url n="id" protocol="file" path="/C:/Users/deidigitalis/AppData/Roaming/JDeveloper/system12.2.1.2.42.170105.1224/o.jdeveloper/Hibernate Validator.library"/>
+            <value n="isJDK" v="false"/>
+         </hash>
+         <hash>
+            <value n="id" v="EJB"/>
             <value n="isJDK" v="false"/>
          </hash>
       </list>
